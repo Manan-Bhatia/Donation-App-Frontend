@@ -20,10 +20,10 @@ function App() {
 
     return (
         <>
-            <nav className="flex justify-between px-10 py-3">
-                <h1>Donation</h1>
-                <ul className="flex gap-3">
-                    <li>
+            <nav className="flex justify-between px-5 py-5 items-center lg:px-20">
+                <h1 className="text-blue-600 font-bold text-3xl">Share-aid</h1>
+                <ul className="flex gap-3 lg:gap-8">
+                    <li className="text-md p-2">
                         <Link to="/">Home</Link>
                     </li>
                     {localStorage.getItem("token") ? (
@@ -44,7 +44,7 @@ function App() {
                             Logout
                         </li>
                     ) : (
-                        <li>
+                        <li className="bg-blue-600 px-5 py-2 text-white  rounded-md ">
                             <Link to="/login">Login</Link>
                         </li>
                     )}
