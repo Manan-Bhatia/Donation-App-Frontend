@@ -21,14 +21,14 @@ function App() {
     return (
         <>
             <nav className="flex justify-between px-5 py-5 items-center lg:px-20">
-                <h1 className="text-blue-600 font-bold text-3xl">Share-aid</h1>
-                <ul className="flex gap-3 lg:gap-8">
-                    <li className="text-md p-2">
+                <h1 className="font-bold font-poppins text-pink text-2xl lg:text-4xl">Donation</h1>
+                <ul className="flex gap-2 lg:gap-8">
+                    <li className="font-semibold p-2 text-blue font-inter tetx-md lg:text-lg ">
                         <Link to="/">Home</Link>
                     </li>
                     {localStorage.getItem("token") ? (
                         <li
-                            className="cursor-pointer"
+                            className="bg-blue-600 px-5 py-2 text-white bg-pink font-inter font-semibold rounded-md text-md cursor-pointer lg:text-lg "
                             onClick={() => {
                                 axios
                                     .post("/logout")
@@ -44,7 +44,7 @@ function App() {
                             Logout
                         </li>
                     ) : (
-                        <li className="bg-blue-600 px-5 py-2 text-white  rounded-md ">
+                        <li className="bg-blue-600 px-5 py-2 text-white bg-pink font-inter font-semibold rounded-md text-md lg:text-lg">
                             <Link to="/login">Login</Link>
                         </li>
                     )}
