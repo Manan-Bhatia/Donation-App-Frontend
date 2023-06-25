@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import axios from "./api/axios";
-const LOGIN_URL = "/login";
+const LOGIN_URL = "accounts/login";
 
 export default function Login() {
     const navigate = useNavigate();
@@ -26,7 +26,7 @@ export default function Login() {
         axios
             .post(LOGIN_URL, data)
             .then((res) => {
-                console.log(res);
+                alert("Login Successful");
                 localStorage.setItem("token", res.data.token);
                 navigate("/");
             })

@@ -1,16 +1,15 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "./api/axios";
-const REGISTER_URL = "accounts/register";
+const RESET_PASSWORD_URL = "accounts/change-password";
 
-export default function Signup() {
+export default function resetPassword() {
     const navigate = useNavigate();
 
     const [data, setData] = useState({
-        username: "",
-        email: "",
-        password: "",
+        old_password: "",
+        new_password: "",
     });
 
     const handleChange = (e) => {
@@ -23,57 +22,48 @@ export default function Signup() {
     const handleSubmit = (e) => {
         e.preventDefault();
         axios
-            .post(REGISTER_URL, data)
+            .put(RESET_PASSWORD_URL, data)
             .then(() => {
-                alert("Signup Successful");
-                navigate("/login");
+                alert("Password Changed Successfully");
+                navigate("/");
             })
             .catch((err) => console.log(err));
     };
 
-    if (localStorage.getItem("token")) {
+    if (!localStorage.getItem("token")) {
         useEffect(() => {
             navigate("/");
         }, []);
     } else {
+        axios.defaults.headers.common[
+            "Authorization"
+        ] = `Token ${localStorage.getItem("token")}`;
         return (
             <>
-                <h1>Signup Page</h1>
+                <h1>Password Reset</h1>
                 <form onSubmit={handleSubmit}>
                     <div>
-                        <label htmlFor="username">Username</label>
+                        <label htmlFor="old_password">Old Password</label>
                         <input
                             className="border-2"
                             autoComplete="off"
                             required
-                            type="text"
-                            name="username"
-                            id="username"
-                            value={data.username}
+                            type="password"
+                            name="old_password"
+                            id="old_password"
+                            value={data.old_password}
                             onChange={handleChange}
                         />
                     </div>
                     <div>
-                        <label htmlFor="email">Email</label>
-                        <input
-                            className="border-2"
-                            required
-                            type="email"
-                            name="email"
-                            id="email"
-                            value={data.email}
-                            onChange={handleChange}
-                        />
-                    </div>
-                    <div>
-                        <label htmlFor="password">Password</label>
+                        <label htmlFor="new_password">New Password</label>
                         <input
                             className="border-2"
                             required
                             type="password"
-                            name="password"
-                            id="password"
-                            value={data.password}
+                            name="new_password"
+                            id="new_password"
+                            value={data.new_password}
                             onChange={handleChange}
                         />
                     </div>
@@ -81,14 +71,9 @@ export default function Signup() {
                         type="submit"
                         className="bg-sky-500 rounded-md px-5 text-sm py-1 text-white"
                     >
-                        Signup
+                        Submit
                     </button>
                 </form>
-                <p>
-                    Already registered?
-                    <br />
-                    <Link to="/login">Sign in</Link>
-                </p>
             </>
         );
     }

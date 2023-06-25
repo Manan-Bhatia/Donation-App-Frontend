@@ -3,6 +3,7 @@ import { Link, Route, Routes, useNavigate } from "react-router-dom";
 import Home from "./Home";
 import Login from "./Login";
 import Signup from "./Signup";
+import ChangePassword from "./resetPassword";
 import axios from "./api/axios";
 
 function App() {
@@ -27,22 +28,27 @@ function App() {
                         <Link to="/">Home</Link>
                     </li>
                     {localStorage.getItem("token") ? (
-                        <li
-                            className="cursor-pointer"
-                            onClick={() => {
-                                axios
-                                    .post("/logout")
-                                    .then((res) => {
-                                        console.log(res);
-                                        setAuthToken(null);
-                                        localStorage.removeItem("token");
-                                        navigate("/login");
-                                    })
-                                    .catch((err) => console.log(err));
-                            }}
-                        >
-                            Logout
-                        </li>
+                        <>
+                            <li
+                                className="cursor-pointer"
+                                onClick={() => {
+                                    axios
+                                        .post("accounts/logout")
+                                        .then((res) => {
+                                            alert("Logout Successful");
+                                            setAuthToken(null);
+                                            localStorage.removeItem("token");
+                                            navigate("/login");
+                                        })
+                                        .catch((err) => console.log(err));
+                                }}
+                            >
+                                Logout
+                            </li>
+                            <li>
+                                <Link to = "/change-password">Reset Password</Link>
+                            </li>
+                        </>
                     ) : (
                         <li>
                             <Link to="/login">Login</Link>
@@ -55,6 +61,7 @@ function App() {
                     <Route path="/" element={<Home />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/signup" element={<Signup />} />
+                    <Route path="/change-password" element={<ChangePassword />} />
                 </Routes>
             </main>
         </>
