@@ -18,5 +18,7 @@ export default {
             white: "#ffffff",
         },
     },
-    plugins: [],
+    plugins: [
+
+    ],
 };

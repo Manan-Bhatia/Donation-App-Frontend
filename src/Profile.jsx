@@ -1,8 +1,8 @@
 import React from "react";
 import axios from "./api/axios";
 import { useState, useEffect} from "react";
-import data from "./dummydata.json";
-const ProfileURL = "/api/accounts/profile";
+const ProfileURL = "/accounts/profile";
+const UserDontaionsURL = "/donations/userdonations/";
 import Card from "./Card";
 
 export default function Profile({}) {
@@ -17,50 +17,47 @@ export default function Profile({}) {
     setAuthToken(localStorage.getItem("token"));
 
     const [userData, setUserData] = useState({});
-    // axios
-    //     .get(ProfileURL)
-    //     .then((res) => {
-    //         // setUserData(res.data.user);
-    //         setUserData(data[1].user);
-    //     })
-    //     .catch((err) => console.log(err));
 
-    useEffect(() => {
-        setUserData(data[1].user);
-    }, []);
+
+    axios
+        .get(ProfileURL)
+        .then((res) => {
+            console.log(res)
+            // setUserData({...res.data});
+        })
+        .catch((err) => console.log(err));
+
+    console.log(userData)
+
     const [visibleCards, setVisibleCards] = useState(4);
 
     const handleSeeMoreClick = () => {
         setVisibleCards((prevVisibleCards) => prevVisibleCards + 4);
     };
 
+    const userID = userData.id; 
     const [userDonationItems, setUserDonationItems] = useState([]);
-    useEffect(() => {
-        setUserDonationItems(data[0]);
-    }, []);
-    // axios
-    //     .get(UserDontaionsURL + userID)
-    //     .then((res) =>{
-    //         // access the data from the response
-    //         console.log(res)
-    //     })
-    //     .catch((err) => console.log(err));
-
-    console.log(userDonationItems);
+    axios
+        .get(UserDontaionsURL + userID)
+        .then((res) =>{
+            console.log(res.data)
+            setUserDonationItems(res.data)
+        })
+        .catch((err) => console.log(err));
 
     return (
         <div>
             <h1>My Profile </h1>
-            {userData.profile_picture == null ? (
+            {userData.user_detail.profile_picture == null ? (
                 <img
                     src="https://www.w3schools.com/howto/img_avatar.png"
                     alt="Avatar"
                 />
             ) : (
-                <img src={userData.profile_picture} alt="Avatar" />
+                <img src={userData.user_detail.profile_picture} alt="Avatar" />
             )}
-            <h2>Rating: {userData.rating}</h2>
-            <h2>Username: {userData.username}</h2>
+            <h2>Rating: {userData.user_detail.rating}</h2>
+            <h2>Username: {userData.user_detail.bio}</h2>
             <h2>Bio: {userData.bio}</h2>
             <h2>Email: {userData.email}</h2>
 

@@ -7,6 +7,7 @@ import ChangePassword from "./resetPassword";
 import Profile from "./Profile";
 import axios from "./api/axios";
 import UserProfile from "./userProfile";
+import Claim from "./Claim";
 
 function App() {
     const navigate = useNavigate();
@@ -18,11 +19,12 @@ function App() {
             delete axios.defaults.headers.common["Authorization"];
         }
     };
+    setAuthToken(localStorage.getItem("token"));
+
     const [isVisibile, setIsVisible] = React.useState(false);
     const handleClick = (e) => {
         setIsVisible(!isVisibile);
     }
-    setAuthToken(localStorage.getItem("token"));
     return (
         <>
             <nav className="flex justify-between px-5 py-5 items-center lg:px-20">
@@ -155,6 +157,7 @@ function App() {
                         path="/userProfile/:userID"
                         element={<UserProfile />}
                     />
+                    <Route path="/claim/:donationID" element={<Claim />} />
                 </Routes>
             </main>
         </>

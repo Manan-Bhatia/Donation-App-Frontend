@@ -5,11 +5,6 @@ import axios from "./api/axios";
 import Card from "./Card";
 
 export default function Home() {
-    if (localStorage.getItem("token")) {
-        axios.defaults.headers.common[
-            "Authorization"
-        ] = `Token ${localStorage.getItem("token")}`;
-    }
 
     const [visibleCards, setVisibleCards] = useState(4);
 

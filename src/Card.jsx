@@ -49,9 +49,12 @@ export default function Card({
                         </h5>
                     </a>
                     <p className="font-inter ">{item_desc}</p>
-                    <p className="font-poppins font-medium ">By: <Link to={`/userProfile/${createdby}`}>
+                    <p className="font-poppins font-medium ">
+                        By:{" "}
+                        <Link to={`/userProfile/${createdby}`}>
                             @{createdbyUser}
-                        </Link></p>
+                        </Link>
+                    </p>
                     <p className="text-xs font-light"> {Location}</p>
                 </div>
 
@@ -63,14 +66,15 @@ export default function Card({
                     )}
                     {myProfile ? null : (
                         <>
-                            <button
-                                data-modal-target="claimModal"
-                                data-modal-togle="claimModal"
-                                className=" w-24 py-2 text-white bg-pink font-inter font-md rounded-md lg:w-32"
-                            >
-                                Claim Now
-                            </button>
-
+                            <Link to = {`claim/${createdby}`}>
+                                <button
+                                    data-modal-target="claimModal"
+                                    data-modal-togle="claimModal"
+                                    className=" w-24 py-2 text-white bg-pink font-inter font-md rounded-md lg:w-32"
+                                >
+                                    Claim Now
+                                </button>
+                            </Link>
                         </>
                     )}
                 </div>

@@ -6,7 +6,7 @@ import { useState } from "react";
 import Card from "./Card";
 
 const UserProfileURL = "/accounts/user/";
-const UserDontaionsURL = "/api/donations/userdonations/";
+const UserDonationsURL = "/api/donations/userdonations/";
 
 export default function UserProfile() {
     const { userID } = useParams();
