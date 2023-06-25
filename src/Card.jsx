@@ -21,29 +21,46 @@ export default function Card({
 
     setAuthToken(localStorage.getItem("token"));
 
-    const [createdbyUser, setcreatedbyUser] = useState("")
+    const [createdbyUser, setcreatedbyUser] = useState("");
 
-    axios.get(UserProfileURL + createdby)
-    .then(res => {
-        setcreatedbyUser(res.data.user.username)
-    })
-    .catch(err => console.log(err))
-
+    axios
+        .get(UserProfileURL + createdby)
+        .then((res) => {
+            setcreatedbyUser(res.data.user.username);
+        })
+        .catch((err) => console.log(err));
 
     return (
-        <div className="card">
-            <img
-                src={`https://shareaid.pythonanywhere.com${item_picture}`}
-                alt={item_name}
-                className="card-image"
-            />
-            <div className="card-stats">
-                <span className="text-lg font-semibold">{item_name}</span>
-                <p className="text-xs font-light">{item_desc}</p>
-                <span className="text-xs font-light">Location</span>
-                <p className="text-xs font-light"> {Location}</p>
-                {<Link to ={`/userProfile/${createdby}`}>{createdbyUser}</Link>}
+        <>
+            <div className="w-72 p-3 shadow-2xl bg-white rounded-lg  lg:w- ">
+                <a href="#">
+                    <img
+                        className="rounded-t-lg w-72"
+                        src={`https://shareaid.pythonanywhere.com${item_picture}`}
+                        alt=""
+                    />
+                </a>
+                <div className="p-2">
+                    <a href="#">
+                        <h5 className="mb-2 font-poppins text-2xl font-bold tracking-tight text-blue">
+                            {item_name}
+                        </h5>
+                    </a>
+                    <p className="font-inter ">{item_desc}</p>
+                    <p className="text-xs font-light"> {Location}</p>
+                </div>
+
+                <div>
+                    {
+                        <Link to={`/userProfile/${createdby}`}>
+                            {createdbyUser}
+                        </Link>
+                    }
+                    <button className=" w-24 py-2 text-white bg-pink font-inter font-md rounded-md lg:w-32">
+                        Claim Now
+                    </button>
+                </div>
             </div>
-        </div>
+        </>
     );
 }

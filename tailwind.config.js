@@ -15,7 +15,7 @@ export default {
       'red':"#ec5747",
       'pink':"#fe3e50",
       'blue':"#184463",
-      'white':"#fffff0"
+      'white':"#ffffff"
     }
   },
   plugins: [],
