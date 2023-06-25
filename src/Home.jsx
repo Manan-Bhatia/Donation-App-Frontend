@@ -30,7 +30,7 @@ export default function Home() {
 
     return (
         <>
-            <div className="px-5 py-32 lg:px-8 lg:py-32 h-auto relative">
+            <div className="px-5 py-32 lg:px-8 lg:py-24 ">
                 <h1 className="text-5xl text-blue leading-[3.5rem] font-poppins font-medium lg:text-7xl lg:leading-[6rem]">
                     Uniting for{" "}
                     <span className="text-pink font-bold">Sustainability</span>,
@@ -38,13 +38,15 @@ export default function Home() {
                     <span className="text-pink font-bold">Donation</span> at a
                     Time !
                 </h1>
-                <div className="flex gap-3 j">
+                <div className="flex gap-3">
                     <button className="mt-10 w-full py-2 text-white bg-pink font-inter font-semibold rounded-md lg:w-48">
                         Donate NOW!
                     </button>
-                    <button className="mt-10 w-full py-2 text-blue font-inter font-semibold rounded-md lg:w-48">
-                        View availble Items
+                    <a href="#name"className="mt-10 w-full py-2 text-blue font-inter font-semibold rounded-md lg:w-48">
+                    <button >
+                       View availble Items 
                     </button>
+                    </a>
                 </div>
                 <div>
                     <div class="wave"></div>
@@ -52,19 +54,27 @@ export default function Home() {
                     <div class="wave"></div>
                 </div>
             </div>
-            <div className="card-grid">
+            <div className="px-8 mb-9 md:py-4">
+            <h2 className="py-4 text-3xl font-poppins text-pink md:text-4xl" >Why ShareAid ?</h2>
+                <p className="font-Inter text-blue font-semibold text-md leading-[2rem] md:text-xl ">
+                Join our online community at ShareAid and be a part of the sustainable revolution! By donating and receiving old items, you can actively contribute to reducing waste, promoting sustainability, and protecting the environment.Together, let's create a brighter future by embracing the power of second-hand items and inspiring others to join the movement. Start donating and receiving today, and together, we'll make a sustainable difference, one item at a time.
+                </p>
+            </div>
+            <h2 className="px-8 py-4 text-3xl font-poppins text-pink" >Some available Items</h2>
+            <div id="name" className="p-2 flex flex-wrap gap-5 justify-center lg:px-8">
                 {data.slice(0, visibleCards).map((item) => (
                     <Card key={item.id} {...item} />
                 ))}
-            </div>
-            {visibleCards < data.length && (
+                {visibleCards < data.length && (
                 <button
-                    className="bg-sky-500 rounded-md px-4 py-1 text-sm text-white mb-4"
-                    onClick={handleSeeMoreClick}
+                className="bg-blue-600 px-5 py-2 text-white bg-blue font-inter font-semibold rounded-md text-md cursor-pointer lg:text-lg "
+                onClick={handleSeeMoreClick}
                 >
                     See More
                 </button>
             )}
+            </div>
+            
         </>
     );
 }

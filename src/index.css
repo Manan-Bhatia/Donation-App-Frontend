@@ -2,38 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-
-.card-grid {
-    padding: 1rem;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
-
-/* Card */
-.card {
-    font-size: 14px;
-    margin-bottom: 2%;
-}
-
-.card-image {
-    border-radius: 10px;
-    width: 100%;
-}
-
-@media (min-width: 475px)
-{
-    .card{
-        width: 32%;
+*{
+    scroll-behavior: smooth;
+    box-sizing: border-box;
     }
-}
-
-@media (min-width: 900px)
-{
-    .card{
-        width: 24%;
-    }
-}
     .wave {
         background: rgb(255 153 153/ 50%);
         border-radius: 1000% 1000% 0 0;

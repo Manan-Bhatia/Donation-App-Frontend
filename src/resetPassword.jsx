@@ -40,40 +40,48 @@ export default function resetPassword() {
         ] = `Token ${localStorage.getItem("token")}`;
         return (
             <>
-                <h1>Password Reset</h1>
-                <form onSubmit={handleSubmit}>
-                    <div>
-                        <label htmlFor="old_password">Old Password</label>
+                 <div className="flex flex-col items-center py-20 md:py-10">
+                <h1 className="text-3xl text-blue font-bold py-9 text-slate-500 font-poppins" >Reset Password</h1>
+                <div className="w-80 flex flex-col gap-4">
+                <form  className="flex flex-col gap-5 font-inter " onSubmit={handleSubmit}>
+                    <div className="flex flex-col gap-2" >
+                        <label htmlFor="old_password"></label>
                         <input
-                            className="border-2"
+                            className="w-full  py-1.5 border-b-2 focus:outline-none  text-blue placeholder:text-gray-400 sm:text-sm sm:leading-6"
                             autoComplete="off"
                             required
                             type="password"
                             name="old_password"
                             id="old_password"
+                            placeholder="Old Password"
                             value={data.old_password}
                             onChange={handleChange}
                         />
                     </div>
                     <div>
-                        <label htmlFor="new_password">New Password</label>
+                        <label htmlFor="new_password"></label>
                         <input
-                            className="border-2"
+                            className="w-full  py-1.5 border-b-2 focus:outline-none  text-blue placeholder:text-gray-400 sm:text-sm sm:leading-6"
                             required
                             type="password"
                             name="new_password"
                             id="new_password"
+                            placeholder="New Password"
                             value={data.new_password}
                             onChange={handleChange}
                         />
                     </div>
+                    <div>
                     <button
                         type="submit"
-                        className="bg-sky-500 rounded-md px-5 text-sm py-1 text-white"
+                        className="flex w-full justify-center rounded-md bg-blue px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                     >
                         Submit
                     </button>
+                    </div>
                 </form>
+                </div>
+                </div>
             </>
         );
     }

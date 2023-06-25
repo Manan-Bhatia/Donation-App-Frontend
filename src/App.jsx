@@ -32,6 +32,14 @@ function App() {
                     {localStorage.getItem("token") ? (
                         <>
                             <li
+                                className="bg-blue-600 px-5 py-2 text-blue font-inter font-semibold rounded-md text-md cursor-pointer lg:text-lg "
+                                >
+
+                                <Link to="/change-password">
+                                    Reset Password
+                                </Link>
+                            </li>
+                            <li
                                 className="bg-blue-600 px-5 py-2 text-white bg-pink font-inter font-semibold rounded-md text-md cursor-pointer lg:text-lg "
                                 onClick={() => {
                                     axios
@@ -47,11 +55,7 @@ function App() {
                             >
                                 Logout
                             </li>
-                            <li>
-                                <Link to="/change-password">
-                                    Reset Password
-                                </Link>
-                            </li>
+                           
                         </>
                     ) : (
                         <li className="bg-blue-600 px-5 py-2 text-white bg-pink font-inter font-semibold rounded-md text-md lg:text-lg">
