@@ -18,16 +18,26 @@ export default function Profile({}) {
     setAuthToken(localStorage.getItem("token"));
 
     const [userData, setUserData] = useState({});
+    const [userDonationItems, setUserDonationItems] = useState([]);
 
-    axios
-        .get(ProfileURL)
-        .then((res) => {
-            console.log(res);
-            // setUserData({...res.data});
-        })
-        .catch((err) => console.log(err));
+    let userID = null;
+    useEffect(() => {
+        axios
+            .get(ProfileURL)
+            .then((res) => {
+                userID = res.data.user.id;
+                setUserData(res.data.user);
 
-    console.log(userData);
+                axios
+                    .get(UserDontaionsURL + userID)
+                    .then((res) => {
+                        console.log(res.data);
+                        setUserDonationItems(res.data);
+                    })
+                    .catch((err) => console.log(err));
+            })
+            .catch((err) => console.log(err));
+    }, []);
 
     const [visibleCards, setVisibleCards] = useState(4);
 
@@ -35,19 +45,9 @@ export default function Profile({}) {
         setVisibleCards((prevVisibleCards) => prevVisibleCards + 4);
     };
 
-    const userID = userData.id;
-    const [userDonationItems, setUserDonationItems] = useState([]);
-    axios
-        .get(UserDontaionsURL + userID)
-        .then((res) => {
-            console.log(res.data);
-            setUserDonationItems(res.data);
-        })
-        .catch((err) => console.log(err));
-
     return (
         <div className="">
-            <Link to = "/AddDonation">
+            <Link to="/AddDonation">
                 <button>Add donation</button>
             </Link>
             {/* <h1>My Profile </h1>
@@ -81,14 +81,14 @@ export default function Profile({}) {
                                     alt="Avatar"
                                     className="shadow-xl rounded-full align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-[150px]"
                                 />
-                            )}{" "}
+                            )}
                         </div>
                     </div>
                     <div className="w-full text-center mt-20">
                         <div className="flex justify-center lg:pt-4 pt-8 pb-0">
                             <div className="p-3 text-center">
                                 <span className="text-2xl font-bold block uppercase tracking-wide text-pink">
-                                    4
+                                    {userDonationItems.length}
                                 </span>
                                 <span className="text-md text-blue">
                                     Items posted
@@ -96,9 +96,16 @@ export default function Profile({}) {
                             </div>
 
                             <div className="p-3 text-center">
+                                {/* {userData.user_detail.rating ? (
+                                    ""
+                                ) : (
+                                    <span className="text-2xl font-bold block uppercase tracking-wide text-pink">
+                                        {userData.user_detail.rating}/10
+                                    </span>
+                                )} */}
                                 <span className="text-2xl font-bold block uppercase tracking-wide text-pink">
-                                    {userData.rating}/10
-                                </span>
+                                        5/10
+                                    </span>
                                 <span className="text-md text-blue">
                                     AVG Rating
                                 </span>

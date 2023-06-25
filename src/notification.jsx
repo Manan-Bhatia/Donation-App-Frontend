@@ -36,9 +36,10 @@ export default function Noti() {
       }
 
       const handleRateClick = (id) => {
+        var input = prompt("Enter your rating:");
         id = id.slice(13,id.length)
         id = "donations/" + id
-        axios.post(id, {"rating": "5"})
+        axios.post(id, {"rating": {input}})
         .then(res => console.log(res))
         .catch(err => console.log(err))
       }

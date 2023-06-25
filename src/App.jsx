@@ -8,7 +8,7 @@ import Profile from "./Profile";
 import axios from "./api/axios";
 import UserProfile from "./userProfile";
 import Claim from "./Claim";
-import Noti from './notification'
+import Noti from "./notification";
 import AddDonation from "./AddDonation";
 
 function App() {
@@ -26,7 +26,7 @@ function App() {
     const [isVisibile, setIsVisible] = React.useState(false);
     const handleClick = (e) => {
         setIsVisible(!isVisibile);
-    }
+    };
     return (
         <>
             <nav className="flex justify-between px-5 py-5 items-center lg:px-20">
@@ -59,7 +59,9 @@ function App() {
                     </button>
                     <div
                         id="dropdownInformation"
-                        className={`absolute ${isVisibile ? "" : "hidden"} z-10  bg-white divide-y divide-gray-100 rounded-lg shadow-md w-24`}
+                        className={`absolute ${
+                            isVisibile ? "" : "hidden"
+                        } z-10  bg-white divide-y divide-gray-100 rounded-lg shadow-md w-24`}
                     >
                         <ul
                             className="py-2 text-sm  dark:text-gray-200"
@@ -72,6 +74,11 @@ function App() {
                                 <>
                                     <li className="bg-blue-600 px-5 py-2 text-blue font-inter font-semibold rounded-md text-sm cursor-pointer lg:block lg:text-lg ">
                                         <Link to="/profile">Profile</Link>
+                                    </li>
+                                    <li className="bg-blue-600 px-5 py-2 text-blue font-inter font-semibold rounded-md text-sm cursor-pointer lg:block lg:text-lg ">
+                                        <Link to="/notifications">
+                                            <a href="">Notifications</a>
+                                        </Link>
                                     </li>
                                     <li className="bg-blue-600 px-5 py-2 text-blue font-inter font-semibold rounded-md text-sm cursor-pointer lg:block lg:text-lg  ">
                                         <Link to="/change-password">
@@ -118,13 +125,20 @@ function App() {
                                     Reset Password
                                 </Link>
                             </li>
-                            
+
                             <li className="bg-blue-600 px-5 py-2 text-blue font-inter font-semibold rounded-md text-sm cursor-pointer lg:block lg:text-lg  ">
                                 <Link to="/profile">Profile</Link>
                             </li>
-                            <li><Link to="/notifications">
-                            <a href=""><img src="https://static.thenounproject.com/png/2295240-200.png" alt="" className="w-10" /></a>
-                            </Link>
+                            <li>
+                                <Link to="/notifications">
+                                    <a href="">
+                                        <img
+                                            src="https://static.thenounproject.com/png/2295240-200.png"
+                                            alt=""
+                                            className="w-10"
+                                        />
+                                    </a>
+                                </Link>
                             </li>
                             <li
                                 className="bg-blue-600 px-5 py-2 text-white bg-pink font-inter font-semibold rounded-md text-md cursor-pointer lg:text-lg "
@@ -165,8 +179,8 @@ function App() {
                         element={<UserProfile />}
                     />
                     <Route path="/claim/:donationID" element={<Claim />} />
-                    <Route path="/notifications" element={<Noti/>}/>
-                    <Route path = "/AddDonation" element = {<AddDonation/>}/>
+                    <Route path="/notifications" element={<Noti />} />
+                    <Route path="/AddDonation" element={<AddDonation />} />
                 </Routes>
             </main>
         </>
