@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "./api/axios";
 const NOTIFICATION_URL = "/accounts/notifications";
+const ACCEPT_URL = "/donations/approve/";
+
 
 export default function Noti() {
     if (localStorage.getItem("token")) {
@@ -22,6 +24,16 @@ export default function Noti() {
     }, []);
     console.log(notifications)
 
+    const handleOnAccept = (id) => {
+        axios
+        .get(ACCEPT_URL + id)
+        .then(res => {
+            console.log(res)
+            alert("Request Accepted")
+        })
+        .catch(err => console.log(err))
+      }
+
     return (
         <>
             <div className="px-8 py-10 flex flex-col gap-4">
@@ -42,7 +54,7 @@ export default function Noti() {
                                     {notification.body}
                                 </p>
                                 <div>
-                                    <button className="bg-pink font-inter p-2 text-md rounded-md text-white mt-3">
+                                    <button onClick = {() => handleOnAccept(notification.id)}className="bg-pink font-inter p-2 text-md rounded-md text-white mt-3">
                                         Accept
                                     </button>
                                 </div>
@@ -50,11 +62,11 @@ export default function Noti() {
                         ) : (
                             <div className="bg-white p-5 text-inter rounded-md shadow-xl">
                                 <h3 className="font-poppins text-2xl text-bold font-blue">
-                                    This is the heading
+                                    {notification.heading}
                                 </h3>
                                 <div>
                                     <button className="bg-pink font-inter p-2 text-md rounded-md text-white mt-3">
-                                        Accept
+                                        Rate
                                     </button>
                                 </div>
                             </div>
