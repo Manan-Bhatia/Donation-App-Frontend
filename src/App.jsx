@@ -4,7 +4,9 @@ import Home from "./Home";
 import Login from "./Login";
 import Signup from "./Signup";
 import ChangePassword from "./resetPassword";
+import Profile from "./Profile";
 import axios from "./api/axios";
+import UserProfile from "./userProfile";
 
 function App() {
     const navigate = useNavigate();
@@ -48,6 +50,9 @@ function App() {
                                 Logout
                             </li>
                             <li>
+                                <Link to = "/profile">Profile</Link>
+                            </li>
+                            <li>
                                 <Link to="/change-password">
                                     Reset Password
                                 </Link>
@@ -69,6 +74,8 @@ function App() {
                         path="/change-password"
                         element={<ChangePassword />}
                     />
+                    <Route path="/profile" element={<Profile />} />
+                    <Route path="/userProfile/:userID" element={<UserProfile />} />
                 </Routes>
             </main>
         </>

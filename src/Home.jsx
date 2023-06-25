@@ -53,7 +53,6 @@ export default function Home() {
             </div>
             <div className="card-grid">
                 {data.slice(0,visibleCards).map((item) => {
-                    console.log(item);
                     return <Card key={item.d_id} {...item} />;
                 })}
             </div>
