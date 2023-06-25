@@ -56,26 +56,30 @@ export default function Card({
                             @{createdbyUser}
                         </Link>
                     </p>
-                    <p className="text-xs font-light"> {Location}</p>
+                    <p className="text-md font-light"> {Location}</p>
                 </div>
 
                 <div>
-                    {showingOnProfile ? null : (
-                        ""// <Link to={`/userProfile/${createdby}`}>
+                    {
+                        showingOnProfile ? null : "" // <Link to={`/userProfile/${createdby}`}>
                         //     {createdbyUser}
                         // </Link>
-                    )}
+                    }
                     {myProfile ? null : (
                         <>
-                            <Link to = {`claim/${d_id}`}>
-                                <button
-                                    data-modal-target="claimModal"
-                                    data-modal-togle="claimModal"
-                                    className=" w-24 py-2 text-white bg-pink font-inter font-md rounded-md lg:w-32"
-                                >
-                                    Claim Now
-                                </button>
-                            </Link>
+                            {localStorage.getItem("token") ? (
+                                <Link to={`claim/${d_id}`}>
+                                    <button className=" w-24 py-2 text-white bg-pink font-inter font-md rounded-md lg:w-32">
+                                        Claim Now
+                                    </button>
+                                </Link>
+                            ) : (
+                                <Link to="/login">
+                                    <button className=" w-24 py-2 text-white bg-pink font-inter font-md rounded-md lg:w-32">
+                                        Claim Now
+                                    </button>
+                                </Link>
+                            )}
                         </>
                     )}
                 </div>

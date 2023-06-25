@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 import axios from "./api/axios";
 // import data from "./dummydata";
 import Card from "./Card";
+import { Link } from "react-router-dom";
 
 export default function Home() {
-
     const [visibleCards, setVisibleCards] = useState(4);
 
     const handleSeeMoreClick = () => {
@@ -32,14 +32,24 @@ export default function Home() {
                     Time !
                 </h1>
                 <div className="flex gap-3">
-                    <button className="mt-10 w-full py-2 text-white bg-pink font-inter font-semibold rounded-md lg:w-48">
-                        Donate NOW!
-                    </button>
+                    {localStorage.getItem("token") ? (
+                        <Link to="/AddDonation">
+                            <button className="mt-10 w-full py-2 text-white bg-pink font-inter font-semibold rounded-md lg:w-48">
+                                Donate NOW!
+                            </button>
+                        </Link>
+                    ) : (
+                        <Link to="/signup">
+                            <button className="mt-10 w-full py-2 text-white bg-pink font-inter font-semibold rounded-md lg:w-48">
+                                Sign up
+                            </button>
+                        </Link>
+                    )}
                     <a
                         href="#name"
                         className="mt-10 w-full py-2 text-blue font-inter font-semibold rounded-md lg:w-48"
                     >
-                        <button>View availble Items</button>
+                        <button>View available Items</button>
                     </a>
                 </div>
                 <div>
@@ -66,16 +76,19 @@ export default function Home() {
             <h2 className="px-8 py-4 text-3xl font-poppins text-pink">
                 Some available Items
             </h2>
-            <div
-                id="name"
-                className="p-2 flex flex-wrap gap-5 justify-center lg:px-8"
-            >
-                {data.slice(0, visibleCards).map((item) => (
-                    <Card key={item.d_id} {...item} />
-                ))}
+            <div className="flex flex-col justify-center m-5">
+                <div
+                    id="name"
+                    className="p-2 flex flex-wrap gap-5 justify-center lg:px-8"
+                >
+                    {data.slice(0, visibleCards).map((item) => (
+                        <Card key={item.d_id} {...item} />
+                    ))}
+                </div>
+
                 {visibleCards < data.length && (
                     <button
-                        className="bg-blue-600 px-5 py-2 text-white bg-blue font-inter font-semibold rounded-md text-md cursor-pointer lg:text-lg "
+                        className="bg-blue-600 w-52 mx-auto px-5 py-2 text-white bg-blue font-inter font-semibold rounded-md text-md cursor-pointer lg:text-lg "
                         onClick={handleSeeMoreClick}
                     >
                         See More
