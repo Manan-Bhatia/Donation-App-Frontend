@@ -115,10 +115,6 @@ export default function Profile({}) {
                     <h3 className="text-4xl text-pink font-bold leading-normal mb-1">
                         {userData.username}
                     </h3>
-                    <div className="text-,md text-blue mt-0 mb-2 text-slate-400 font-bold uppercase">
-                        <i className="fas fa-map-marker-alt mr-2 text-slate-400 opacity-75"></i>
-                        Paris, France
-                    </div>
                 </div>
                 <div class="mt-6 py-6 border-t border-slate-200 text-center">
                     <div class="flex flex-wrap justify-center">
