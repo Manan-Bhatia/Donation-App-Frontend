@@ -10,6 +10,7 @@ export default function Card({
     item_picture,
     Location,
     createdby,
+    d_id,
     showingOnProfile,
     myProfile,
 }) {
@@ -66,7 +67,7 @@ export default function Card({
                     )}
                     {myProfile ? null : (
                         <>
-                            <Link to = {`claim/${createdby}`}>
+                            <Link to = {`claim/${d_id}`}>
                                 <button
                                     data-modal-target="claimModal"
                                     data-modal-togle="claimModal"
