@@ -21,21 +21,23 @@ function App() {
 
     return (
         <>
-            <nav className="flex justify-between px-10 py-3">
-                <h1>Donation</h1>
-                <ul className="flex gap-3">
-                    <li>
+            <nav className="flex justify-between px-5 py-5 items-center lg:px-20">
+                <h1 className="font-bold font-poppins text-pink text-2xl lg:text-4xl">
+                    Donation
+                </h1>
+                <ul className="flex gap-2 lg:gap-8">
+                    <li className="font-semibold p-2 text-blue font-inter tetx-md lg:text-lg ">
                         <Link to="/">Home</Link>
                     </li>
                     {localStorage.getItem("token") ? (
                         <>
                             <li
-                                className="cursor-pointer"
+                                className="bg-blue-600 px-5 py-2 text-white bg-pink font-inter font-semibold rounded-md text-md cursor-pointer lg:text-lg "
                                 onClick={() => {
                                     axios
                                         .post("accounts/logout")
                                         .then((res) => {
-                                            alert("Logout Successful");
+                                            console.log(res);
                                             setAuthToken(null);
                                             localStorage.removeItem("token");
                                             navigate("/login");
@@ -46,11 +48,13 @@ function App() {
                                 Logout
                             </li>
                             <li>
-                                <Link to = "/change-password">Reset Password</Link>
+                                <Link to="/change-password">
+                                    Reset Password
+                                </Link>
                             </li>
                         </>
                     ) : (
-                        <li>
+                        <li className="bg-blue-600 px-5 py-2 text-white bg-pink font-inter font-semibold rounded-md text-md lg:text-lg">
                             <Link to="/login">Login</Link>
                         </li>
                     )}
@@ -61,7 +65,10 @@ function App() {
                     <Route path="/" element={<Home />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/signup" element={<Signup />} />
-                    <Route path="/change-password" element={<ChangePassword />} />
+                    <Route
+                        path="/change-password"
+                        element={<ChangePassword />}
+                    />
                 </Routes>
             </main>
         </>
