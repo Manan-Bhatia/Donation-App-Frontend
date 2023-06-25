@@ -10,6 +10,8 @@ export default function Card({
     item_picture,
     Location,
     createdby,
+    showingOnProfile,
+    myProfile,
 }) {
     const setAuthToken = (token) => {
         if (token) {
@@ -51,14 +53,23 @@ export default function Card({
                 </div>
 
                 <div>
-                    {
+                    {showingOnProfile ? null : (
                         <Link to={`/userProfile/${createdby}`}>
                             {createdbyUser}
                         </Link>
-                    }
-                    <button className=" w-24 py-2 text-white bg-pink font-inter font-md rounded-md lg:w-32">
-                        Claim Now
-                    </button>
+                    )}
+                    {myProfile ? null : (
+                        <>
+                            <button
+                                data-modal-target="claimModal"
+                                data-modal-togle="claimModal"
+                                className=" w-24 py-2 text-white bg-blue font-inter font-md rounded-md lg:w-32"
+                            >
+                                Claim Now
+                            </button>
+
+                        </>
+                    )}
                 </div>
             </div>
         </>
