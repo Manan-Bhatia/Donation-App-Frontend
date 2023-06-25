@@ -47,9 +47,7 @@ export default function Profile({}) {
 
     return (
         <div className="">
-            <Link to="/AddDonation">
-                <button>Add donation</button>
-            </Link>
+            
             {/* <h1>My Profile </h1>
             {userData.profile_picture == null ? (
                 <img
@@ -131,6 +129,9 @@ export default function Profile({}) {
                         </div>
                     </div>
                 </div>
+                <Link to = "/AddDonation">
+                <button className="w-40 py-2 text-white bg-pink font-inter font-semibold rounded-md">Add donation</button>
+            </Link>
             </div>
 
             <div

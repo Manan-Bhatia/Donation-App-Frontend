@@ -38,7 +38,7 @@ export default function Card({
             <div className="w-72 p-3 shadow-2xl bg-white rounded-lg  lg:w- ">
                 <a href="#">
                     <img
-                        className="rounded-t-lg w-[264px] h-[197px]"
+                        className="rounded-t-lg w-[264px] h-[197px] object-contain"
                         src={`https://shareaid.pythonanywhere.com${item_picture}`}
                         alt=""
                     />
