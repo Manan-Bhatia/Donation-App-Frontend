@@ -40,7 +40,7 @@ export default function Home() {
                         </Link>
                     ) : (
                         <Link to="/signup">
-                            <button className="mt-10 w-full py-2 text-white bg-pink font-inter font-semibold rounded-md lg:w-48">
+                            <button className="mt-10 w-32 py-2 text-white bg-pink font-inter font-semibold rounded-md lg:w-48">
                                 Sign up
                             </button>
                         </Link>
