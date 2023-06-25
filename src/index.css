@@ -63,20 +63,21 @@
             animation: wave 10s -2.5s linear infinite;
             transform: translate3d(0, 0, 0);
             opacity: 0.8;
-            bottom: 0;
+            bottom: 2em;
             left: 0;
             z-index: -1;
         }
         
         .wave:nth-of-type(2) {
-            bottom: -1.25em;
+            bottom: -1em;
             animation: wave 18s linear reverse infinite;
-            opacity: 1;
+            opacity: 7;
         }
         
         .wave:nth-of-type(3) {
-            bottom: -1em;
+            bottom: -.7em;
             animation: wave 20s -1s reverse infinite;
-            opacity: .4;
+            opacity: .5;
         }
     }
+
