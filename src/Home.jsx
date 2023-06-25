@@ -1,9 +1,9 @@
 import React from "react";
-import { useEffect } from "react";
+import { useEffect, useState} from "react";
 import axios from "./api/axios";
-import data from "./dummydata";
+// import data from "./dummydata";
 import Card from "./Card";
-import { Link } from "react-router-dom";
+
 
 export default function Home() {
     if (localStorage.getItem("token")) {
@@ -12,22 +12,21 @@ export default function Home() {
         ] = `Token ${localStorage.getItem("token")}`;
     }
 
-    const [visibleCards, setVisibleCards] = React.useState(4);
+    const [visibleCards, setVisibleCards] = useState(4);
 
     const handleSeeMoreClick = () => {
         setVisibleCards((prevVisibleCards) => prevVisibleCards + 4);
     };
 
-    // let data = []
-    // useEffect(() => {
-    //     axios
-    //         .get("/donations")
-    //         .then((res) => {
-    //             data = res.data;
-    //         })
-    //         .catch((err) => console.log(err));
-    // }, []);
-
+    let [data,setData] = useState([]);
+    useEffect(() => {
+        axios
+            .get("/donations/")
+            .then((res) => {
+                setData(res.data);
+            })
+            .catch((err) => console.log(err));
+    }, []);
     return (
         <>
             <div className="px-5 py-32 lg:px-8 lg:py-32 h-auto relative">
@@ -47,15 +46,16 @@ export default function Home() {
                     </button>
                 </div>
                 <div>
-                    <div class="wave"></div>
-                    <div class="wave"></div>
-                    <div class="wave"></div>
+                    <div className="wave"></div>
+                    <div className="wave"></div>
+                    <div className="wave"></div>
                 </div>
             </div>
             <div className="card-grid">
-                {data.slice(0, visibleCards).map((item) => (
-                    <Card key={item.id} {...item} />
-                ))}
+                {data.slice(0,visibleCards).map((item) => {
+                    console.log(item);
+                    return <Card key={item.d_id} {...item} />;
+                })}
             </div>
             {visibleCards < data.length && (
                 <button
