@@ -18,7 +18,10 @@ function App() {
             delete axios.defaults.headers.common["Authorization"];
         }
     };
-
+    const [isVisibile, setIsVisible] = React.useState(false);
+    const handleClick = (e) => {
+        setIsVisible(!isVisibile);
+    }
     setAuthToken(localStorage.getItem("token"));
     return (
         <>
@@ -26,16 +29,16 @@ function App() {
                 <h1 className="font-bold font-poppins text-pink text-2xl lg:text-4xl">
                     <Link to="/">ShareAid</Link>
                 </h1>
-                <ul id="mob" className=" relative lg:hidden">
+                <ul onClick={handleClick} className=" relative lg:hidden">
                     <button
                         id="dropdownInformationButton"
                         data-dropdown-toggle="dropdownInformation"
-                        class="text-white bg-pink 300 font-medium rounded-lg text-sm px-4 py-2.5 text-center flex items-center"
+                        className="text-white bg-pink 300 font-medium rounded-lg text-sm px-4 py-2.5 text-center flex items-center"
                         type="button"
                     >
                         Menu
                         <svg
-                            class="w-4 h-4 ml-2"
+                            className="w-4 h-4 ml-2"
                             aria-hidden="true"
                             fill="none"
                             stroke="currentColor"
@@ -43,19 +46,19 @@ function App() {
                             xmlns="http://www.w3.org/2000/svg"
                         >
                             <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
                                 d="M19 9l-7 7-7-7"
                             ></path>
                         </svg>
                     </button>
                     <div
                         id="dropdownInformation"
-                        class=" absolute hidden z-10  bg-white divide-y divide-gray-100 rounded-lg shadow-md w-24"
+                        className={`absolute ${isVisibile ? "" : "hidden"} z-10  bg-white divide-y divide-gray-100 rounded-lg shadow-md w-24`}
                     >
                         <ul
-                            class="py-2 text-sm  dark:text-gray-200"
+                            className="py-2 text-sm  dark:text-gray-200"
                             aria-labelledby="dropdownInformationButton"
                         >
                             <li className="bg-blue-600 px-5 py-2 text-blue font-inter font-semibold rounded-md text-sm cursor-pointer lg:block lg:text-lg ">
