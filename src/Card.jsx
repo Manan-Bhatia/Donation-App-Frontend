@@ -37,7 +37,7 @@ export default function Card({
             <div className="w-72 p-3 shadow-2xl bg-white rounded-lg  lg:w- ">
                 <a href="#">
                     <img
-                        className="rounded-t-lg w-72"
+                        className="rounded-t-lg w-[264px] h-[197px]"
                         src={`https://shareaid.pythonanywhere.com${item_picture}`}
                         alt=""
                     />
@@ -60,9 +60,9 @@ export default function Card({
 
                 <div>
                     {showingOnProfile ? null : (
-                        <Link to={`/userProfile/${createdby}`}>
-                            {createdbyUser}
-                        </Link>
+                        ""// <Link to={`/userProfile/${createdby}`}>
+                        //     {createdbyUser}
+                        // </Link>
                     )}
                     {myProfile ? null : (
                         <>

@@ -8,6 +8,7 @@ import Profile from "./Profile";
 import axios from "./api/axios";
 import UserProfile from "./userProfile";
 import Claim from "./Claim";
+import Noti from './notification'
 
 function App() {
     const navigate = useNavigate();
@@ -116,6 +117,14 @@ function App() {
                                     Reset Password
                                 </Link>
                             </li>
+                            
+                            <li className="bg-blue-600 px-5 py-2 text-blue font-inter font-semibold rounded-md text-sm cursor-pointer lg:block lg:text-lg  ">
+                                <Link to="/profile">Profile</Link>
+                            </li>
+                            <li><Link to="/notifications">
+                            <a href=""><img src="https://static.thenounproject.com/png/2295240-200.png" alt="" className="w-10" /></a>
+                            </Link>
+                            </li>
                             <li
                                 className="bg-blue-600 px-5 py-2 text-white bg-pink font-inter font-semibold rounded-md text-md cursor-pointer lg:text-lg "
                                 onClick={() => {
@@ -131,9 +140,6 @@ function App() {
                                 }}
                             >
                                 Logout
-                            </li>
-                            <li>
-                                <Link to="/profile">Profile</Link>
                             </li>
                         </>
                     ) : (
@@ -158,6 +164,7 @@ function App() {
                         element={<UserProfile />}
                     />
                     <Route path="/claim/:donationID" element={<Claim />} />
+                    <Route path="/notifications" element={<Noti/>}/>
                 </Routes>
             </main>
         </>
