@@ -1,9 +1,10 @@
 import React from "react";
 import axios from "./api/axios";
-import { useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 const ProfileURL = "/accounts/profile";
 const UserDontaionsURL = "/donations/userdonations/";
 import Card from "./Card";
+import { Link } from "react-router-dom";
 
 export default function Profile({}) {
     const setAuthToken = (token) => {
@@ -18,16 +19,15 @@ export default function Profile({}) {
 
     const [userData, setUserData] = useState({});
 
-
     axios
         .get(ProfileURL)
         .then((res) => {
-            console.log(res)
+            console.log(res);
             // setUserData({...res.data});
         })
         .catch((err) => console.log(err));
 
-    console.log(userData)
+    console.log(userData);
 
     const [visibleCards, setVisibleCards] = useState(4);
 
@@ -35,18 +35,21 @@ export default function Profile({}) {
         setVisibleCards((prevVisibleCards) => prevVisibleCards + 4);
     };
 
-    const userID = userData.id; 
+    const userID = userData.id;
     const [userDonationItems, setUserDonationItems] = useState([]);
     axios
         .get(UserDontaionsURL + userID)
-        .then((res) =>{
-            console.log(res.data)
-            setUserDonationItems(res.data)
+        .then((res) => {
+            console.log(res.data);
+            setUserDonationItems(res.data);
         })
         .catch((err) => console.log(err));
 
     return (
         <div className="">
+            <Link to = "/AddDonation">
+                <button>Add donation</button>
+            </Link>
             {/* <h1>My Profile </h1>
             {userData.profile_picture == null ? (
                 <img
@@ -63,55 +66,77 @@ export default function Profile({}) {
 
             <h1>My Items</h1> */}
             <div className="pt-20 px-8">
-        <div className="flex flex-wrap justify-center">
-            <div className="w-full flex justify-center">
-                <div className="relative">
-                {userData.profile_picture == null ? (
-                <img
-                    src="https://www.w3schools.com/howto/img_avatar.png"
-                    alt="Avatar"
-                    className="shadow-xl rounded-full align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-[150px]"
-                />
-            ) : (
-                <img src={userData.profile_picture} alt="Avatar" className="shadow-xl rounded-full align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-[150px]" />
-            )}                </div> 
-            </div>
-            <div className="w-full text-center mt-20">
-                <div className="flex justify-center lg:pt-4 pt-8 pb-0">
-                    <div className="p-3 text-center">
-                        <span className="text-2xl font-bold block uppercase tracking-wide text-pink">4</span>
-                        <span className="text-md text-blue">Items posted</span>
+                <div className="flex flex-wrap justify-center">
+                    <div className="w-full flex justify-center">
+                        <div className="relative">
+                            {userData.profile_picture == null ? (
+                                <img
+                                    src="https://www.w3schools.com/howto/img_avatar.png"
+                                    alt="Avatar"
+                                    className="shadow-xl rounded-full align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-[150px]"
+                                />
+                            ) : (
+                                <img
+                                    src={userData.profile_picture}
+                                    alt="Avatar"
+                                    className="shadow-xl rounded-full align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-[150px]"
+                                />
+                            )}{" "}
+                        </div>
                     </div>
-                    
+                    <div className="w-full text-center mt-20">
+                        <div className="flex justify-center lg:pt-4 pt-8 pb-0">
+                            <div className="p-3 text-center">
+                                <span className="text-2xl font-bold block uppercase tracking-wide text-pink">
+                                    4
+                                </span>
+                                <span className="text-md text-blue">
+                                    Items posted
+                                </span>
+                            </div>
 
-                    <div className="p-3 text-center">
-                        <span className="text-2xl font-bold block uppercase tracking-wide text-pink">{userData.rating}/10</span>
-                        <span className="text-md text-blue">AVG Rating</span>
+                            <div className="p-3 text-center">
+                                <span className="text-2xl font-bold block uppercase tracking-wide text-pink">
+                                    {userData.rating}/10
+                                </span>
+                                <span className="text-md text-blue">
+                                    AVG Rating
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="text-center mt-2">
+                    <h3 className="text-4xl text-pink font-bold leading-normal mb-1">
+                        {userData.username}
+                    </h3>
+                    <div className="text-,md text-blue mt-0 mb-2 text-slate-400 font-bold uppercase">
+                        <i className="fas fa-map-marker-alt mr-2 text-slate-400 opacity-75"></i>
+                        Paris, France
+                    </div>
+                </div>
+                <div class="mt-6 py-6 border-t border-slate-200 text-center">
+                    <div class="flex flex-wrap justify-center">
+                        <div class="w-full px-4">
+                            <p class="font-light leading-relaxed text-slate-600 mb-4">
+                                {userData.bio}
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div className="text-center mt-2">
-            <h3 className="text-4xl text-pink font-bold leading-normal mb-1">{userData.username}</h3>
-            <div className="text-,md text-blue mt-0 mb-2 text-slate-400 font-bold uppercase">
-                <i className="fas fa-map-marker-alt mr-2 text-slate-400 opacity-75"></i>Paris, France
-            </div>
-        </div>
-        <div class="mt-6 py-6 border-t border-slate-200 text-center">
-            <div class="flex flex-wrap justify-center">
-                <div class="w-full px-4">
-                    <p class="font-light leading-relaxed text-slate-600 mb-4">{userData.bio}</p>
-                </div>
-            </div>
-        </div>
-    </div>
-            
+
             <div
                 id="name"
                 className="p-2 flex flex-wrap gap-5 justify-center lg:px-8"
             >
                 {userDonationItems.slice(0, visibleCards).map((item) => (
-                    <Card key={item.d_id} {...item} showingOnProfile={true} myProfile={true} />
+                    <Card
+                        key={item.d_id}
+                        {...item}
+                        showingOnProfile={true}
+                        myProfile={true}
+                    />
                 ))}
                 {visibleCards < userDonationItems.length && (
                     <button

@@ -4,6 +4,7 @@ const NOTIFICATION_URL = "/accounts/notifications";
 const ACCEPT_URL = "/donations/approve/";
 
 
+
 export default function Noti() {
     if (localStorage.getItem("token")) {
         axios.defaults.headers.common[
@@ -34,6 +35,14 @@ export default function Noti() {
         .catch(err => console.log(err))
       }
 
+      const handleRateClick = (id) => {
+        id = id.slice(13,id.length)
+        id = "donations/" + id
+        axios.post(id, {"rating": "5"})
+        .then(res => console.log(res))
+        .catch(err => console.log(err))
+      }
+
     return (
         <>
             <div className="px-8 py-10 flex flex-col gap-4">
@@ -60,16 +69,30 @@ export default function Noti() {
                                 </div>
                             </div>
                         ) : (
+                          <>
+                          {notification.body[0] === 'a' ? (
                             <div className="bg-white p-5 text-inter rounded-md shadow-xl">
                                 <h3 className="font-poppins text-2xl text-bold font-blue">
                                     {notification.heading}
                                 </h3>
                                 <div>
-                                    <button className="bg-pink font-inter p-2 text-md rounded-md text-white mt-3">
+                                    <button onClick = {() => handleRateClick(notification.body)}className="bg-pink font-inter p-2 text-md rounded-md text-white mt-3">
                                         Rate
                                     </button>
                                 </div>
                             </div>
+                          ) : (
+                            <div>
+                                <h3 className="font-poppins text-2xl text-bold font-blue">
+                                    {notification.heading}
+                                </h3>
+                                <p className="text-md text-blue font-inter pt-2">
+                                    {notification.body}
+                                </p>
+                            </div>
+                          )}
+                            
+                            </>
                         )}
                     </div>
                 ))}

@@ -9,6 +9,7 @@ import axios from "./api/axios";
 import UserProfile from "./userProfile";
 import Claim from "./Claim";
 import Noti from './notification'
+import AddDonation from "./AddDonation";
 
 function App() {
     const navigate = useNavigate();
@@ -165,6 +166,7 @@ function App() {
                     />
                     <Route path="/claim/:donationID" element={<Claim />} />
                     <Route path="/notifications" element={<Noti/>}/>
+                    <Route path = "/AddDonation" element = {<AddDonation/>}/>
                 </Routes>
             </main>
         </>
