@@ -10,12 +10,12 @@ export default {
                 poppins: "Poppins",
                 inter: "Inter",
             },
-        },
-        colors: {
-            red: "#ec5747",
-            pink: "#fe3e50",
-            blue: "#184463",
-            white: "#ffffff",
+            colors: {
+                red: "#ec5747",
+                pink: "#fe3e50",
+                blue: "#184463",
+                white: "#ffffff"
+            },
         },
     },
     plugins: [

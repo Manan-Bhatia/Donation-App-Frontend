@@ -2,6 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import axios from "./api/axios";
+import {LazyLoadImage} from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css'
 const UserProfileURL = "/accounts/user/";
 
 export default function Card({
@@ -37,11 +39,16 @@ export default function Card({
         <>
             <div className="w-72 p-3 shadow-2xl bg-white rounded-lg  lg:w- ">
                 <a href="#">
-                    <img
+                    <LazyLoadImage
+                        src={`https://shareaid.pythonanywhere.com${item_picture}`}
+                        className="rounded-t-lg w-[264px] h-[197px] object-contain"
+                        effect="blur"
+                    />
+                    {/* <img
                         className="rounded-t-lg w-[264px] h-[197px] object-contain"
                         src={`https://shareaid.pythonanywhere.com${item_picture}`}
                         alt=""
-                    />
+                    /> */}
                 </a>
                 <div className="p-2">
                     <a href="#">
