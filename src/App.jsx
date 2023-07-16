@@ -21,7 +21,20 @@ function App() {
             delete axios.defaults.headers.common["Authorization"];
         }
     };
-    setAuthToken(localStorage.getItem("token"));
+    // Check if the user is logged in
+    if (localStorage.getItem("token")) {
+        setAuthToken(localStorage.getItem("token"))
+        axios.get("/accounts/profile").then((res) => {
+            console.log(res)
+        }).catch((err) => {
+            if(err.response.status === 401)
+            {
+                localStorage.removeItem("token");
+                setAuthToken(null);
+                navigate("/");
+            }
+        })
+    }
 
     const [isVisibile, setIsVisible] = React.useState(false);
     const handleClick = (e) => {
